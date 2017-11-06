@@ -53,8 +53,11 @@ class ChefTest < ActiveSupport::TestCase
     assert_not duplicate_chef.valid?
   end
 
-  test "email should be case insencitive" do
-
+  test "email should be lowercase" do
+    mix_email = "JhON@ExAmplE.cOm"
+    @chef.email = mix_email
+    @chef.save
+    assert_equal mix_email.downcase, @chef.reload.email
   end
 
 end
