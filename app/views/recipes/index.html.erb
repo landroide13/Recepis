@@ -1,5 +1,5 @@
-<h1 align="center">My Recipes</h1>
-<hr>
+
+<%= render 'shared/title', title: 'Showing all Recipes' %>
 
 <% @recipes.each do |r|%>
   <div class="row">
@@ -9,7 +9,7 @@
       </section>
     </div>
     <div class="col-md-8 well">
-      <h4><%= r.name %></h4>
+      <h4><%= link_to r.name, recipe_path(r) %></h4>
       <p><%= truncate(r.description, length: 150) %></p>
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(r.created_at) %> ago</small></span>

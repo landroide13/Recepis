@@ -4,6 +4,19 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def new
+    @recipe = Recipe.new 
+  end
 
+  def show
+    @recipe = Recipe.find params[:id]
+  end  
+
+
+  private 
+
+  def recipe_params
+    @recipe = Recipe.find(params[:id])
+  end
 
 end
