@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'pages/home' => 'pages#home'
 
-  # resources :recipes
+  resources :recipes
 
-  get '/recipes' => 'recipes#index'
-  get 'recipes/:id' => 'recipes#show', as:'recipe'
+  # get '/recipes' => 'recipes#index'
+  # get '/recipes/new' => 'recipes#new', as:'new_recipe'
+  # get '/recipes/:id' => 'recipes#show', as:'recipe'
+  # post '/recipes' => 'recipes#create'
+
+
 
 
 end

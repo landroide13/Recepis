@@ -4,7 +4,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
  
   def setup
     @chef = Chef.create! chefname:"tata", email:"tufo@vn.com"
-    @recipe = Recipe.create name:"pato pure", description:"Toxic", chef:@chef
+    @recipe = Recipe.create name:"Italian Veggies", description:"stir frieds veggies with tomato saurce", chef:@chef
     @recipe2 = @chef.recipes.build name:"Italian Veggies", description:"stir frieds veggies with tomato saurce"
     @recipe2.save
   end
@@ -28,5 +28,30 @@ class RecipesTest < ActionDispatch::IntegrationTest
     assert_match @recipe.description, response.body
     assert_match @chef.chefname, response.body
   end
+
+  test "create a new valid recipe" do
+    get new_recipe_path
+    assert_template 'recipes/new'
+    name_recipe = "Italian Veggies"
+    description_of_recipe = "stir frieds veggies with tomato saurce"
+    assert_difference 'Recipe.count', 1 do
+      post recipes_path, params: { name: name_recipe, description: description_of_recipe} 
+    end
+    follow_redirect!
+    assert_match name_recipe.capitalize, response.body
+    assert_match description_of_recipe, response.body
+  end
+
+  test "reject invalid recipe submission" do
+    get new_recipe_path
+    assert_template 'recipes/new'
+    assert_no_difference 'Recipe.count' do
+      post recipes_path, params: { recipe: { name:" ", description:" "}}
+    end
+    assert_template 'recipes/new'
+    assert_select 'h2.panel-title'
+    assert_select 'div.panel-body'
+  end
+
 
 end
