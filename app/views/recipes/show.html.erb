@@ -23,6 +23,10 @@
         </div>
       </p>
     </div>
+    <div class="recipe-actions">
+      <%= link_to 'Edit Recipe',edit_recipe_path(@recipe), class:"btn btn-warning btn-xs" %>
+      <%= link_to 'Delete Recipe',recipe_path(@recipe), class:"btn btn-danger btn-xs", method: :delete, data:{ confirm:'are you sure?'} %>
+    </div>
   </div>
 </div>
 
