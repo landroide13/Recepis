@@ -18,6 +18,21 @@ class ChefsController < ApplicationController
     end
   end
 
+  def edit
+    @chef = set_params
+  end
+
+  def update
+    @chef = set_params
+    if @chef.update get_params
+      flash[:success] = "Chef successfully updated"
+      redirect_to chef_path(@chef)
+    else
+      flash[:danger] = "Upss, something come up, try again.."
+      render 'edit'
+    end
+  end  
+
   def show
     set_params
   end
