@@ -1,4 +1,12 @@
 
 <%= render 'shared/title', title: 'Showing all Recipes' %>
 
-<%= render 'recipe', obj:@recipes %>
+<div align="center">
+  <%= will_paginate  %>
+</div>  
+
+  <%= render 'recipe', obj:@recipes %>
+
+<div align="center">
+  <%= will_paginate %>
+</div>  

@@ -1,15 +1,11 @@
 class ChefsController < ApplicationController
 
   def index
-    @chefs = Chef.all
+    @chefs = Chef.paginate(page: params[:page], per_page: 3)
   end
-
+ 
   def new
     @chef = Chef.new
-  end
-
-  def index
-    @chefs = Chef.all
   end
 
   def create
@@ -38,7 +34,8 @@ class ChefsController < ApplicationController
   end  
 
   def show
-    set_params
+    @chef = set_params
+    @chef_recipes = @chef.recipes.paginate(page: params[:page], per_page: 2)
   end
 
   private
@@ -48,7 +45,7 @@ class ChefsController < ApplicationController
   end
 
   def set_params
-    @chef = Chef.find params[:id]
+    Chef.find params[:id]
   end
 
 end
