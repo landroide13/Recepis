@@ -1,4 +1,5 @@
 class ChefsController < ApplicationController
+  before_action :set_params, only:[:show, :destroy, :edit, :update]
 
   def index
     @chefs = Chef.paginate(page: params[:page], per_page: 3)
@@ -11,19 +12,24 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new get_params
     if @chef.save
-      flash[:success] = "Chef Successfully created"
+      flash[:success] = "Chef Successfully created.."
       redirect_to chef_path(@chef)
     else
       render 'new'
     end
   end
 
+  def destroy
+    @chef.destroy
+    flash[:danger] = "Chef successfully deleted.."
+    redirect_to chefs_path
+  end
+
   def edit
-    @chef = set_params
+    
   end
 
   def update
-    @chef = set_params
     if @chef.update get_params
       flash[:success] = "Chef successfully updated"
       redirect_to chef_path(@chef)
@@ -34,7 +40,6 @@ class ChefsController < ApplicationController
   end  
 
   def show
-    @chef = set_params
     @chef_recipes = @chef.recipes.paginate(page: params[:page], per_page: 2)
   end
 
@@ -45,7 +50,7 @@ class ChefsController < ApplicationController
   end
 
   def set_params
-    Chef.find params[:id]
+    @chef = Chef.find params[:id]
   end
 
 end
