@@ -12,6 +12,7 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new get_params
     if @chef.save
+      session[:chef_id] = @chef.id
       flash[:success] = "Chef Successfully created.."
       redirect_to chef_path(@chef)
     else

@@ -8,12 +8,10 @@ Rails.application.routes.draw do
 
   get '/signup' => 'chefs#new'
   resources :chefs, except: [:new]
-  # get '/recipes' => 'recipes#index'
-  # get '/recipes/new' => 'recipes#new', as:'new_recipe'
-  # get '/recipes/:id' => 'recipes#show', as:'recipe'
-  # post '/recipes' => 'recipes#create'
-
-
+  
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
 
 
 end
