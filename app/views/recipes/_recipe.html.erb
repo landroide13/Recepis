@@ -12,7 +12,7 @@
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(r.created_at) %> ago</small></span>
       </p>
-      <% if if_logged? && current_chef == r.chef%>
+      <% if if_logged? && (current_chef == r.chef || current_chef.admin?)%>
         <div class="recipes-actions">
           <%= link_to 'Edit Recipe',edit_recipe_path(r), class:"btn btn-warning btn-xs" %>
           <%= link_to 'Delete Recipe',recipe_path(r), class:"btn btn-danger btn-xs", method: :delete, data:{ confirm:'are you sure?'} %>
