@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :if_logged?
+  helper_method :current_chef, :if_logged?
 
   def current_chef
     @current_chef ||= Chef.find session[:chef_id] if session[:chef_id]    
