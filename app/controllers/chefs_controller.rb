@@ -20,7 +20,7 @@ class ChefsController < ApplicationController
       redirect_to chef_path(@chef)
     else
       render 'new'
-    end
+    end 
   end
 
   def destroy

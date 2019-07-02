@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def if_logged?
-    !!current_chef
+    !!current_chef 
   end
 
   def require_user
